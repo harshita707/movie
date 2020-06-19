@@ -5,9 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -20,7 +23,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     public static String BASE_URL = "https://api.themoviedb.org";
     public static int PAGE = 1;
@@ -28,20 +31,13 @@ public class MainActivity extends AppCompatActivity {
     public static String LANGUAGE = "en-US";
     public static String CATEGORY = "popular";
 
-    private TextView tv;
-    private TextView tv2;
-    private RecyclerView recyclerView;
+    private ArrayList<Movie> mMovies = new ArrayList<>();
 
-
-    //private ArrayList<Movie> mMovies = new ArrayList<>();
-    private ArrayList<String> mTitle = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv=findViewById(R.id.text);
-        tv2=findViewById(R.id.text2);
         Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(BASE_URL)
                             .addConverterFactory(GsonConverterFactory.create())
@@ -56,24 +52,37 @@ public class MainActivity extends AppCompatActivity {
                 MovieResults results = response.body();
                 List<MovieResults.ResultsBean> listOfMovies = results.getResults();
 
-                MovieResults.ResultsBean currentMovie = listOfMovies.get(0);
-                tv.setText(currentMovie.getTitle());
-
                 for (int i = 0; i < 20; i++) {
 
-                    MovieResults.ResultsBean currenMovie = listOfMovies.get(i);
-                    //mMovies.add(new Movie(currentMovie.getTitle(), ""));
+                    MovieResults.ResultsBean currentMovie = listOfMovies.get(i);
+                    mMovies.add(new Movie(currentMovie.getTitle(), currentMovie.getPosterPath(), currentMovie.getBackdropPath(), currentMovie.getVoteAverage(),
+                            currentMovie.getReleaseDate(), currentMovie.getOverview()));
 
-                    mTitle.add(currenMovie.getTitle());
 
                 }
-                currentMovie = listOfMovies.get(19);
-                tv2.setText(Integer.toString(mTitle.size()));
+                RecyclerView recyclerView = findViewById(R.id.recycler_view);
+                LinearLayoutManager llm = new LinearLayoutManager(getBaseContext());
+                llm.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(llm);
 
-                recyclerView = findViewById(R.id.recycler_view);
-                recyclerView.setLayoutManager(new LinearLayoutManager(c));
-                MovieAdapter adapter = new MovieAdapter(mTitle);
+                RecyclerViewClickListener listener = new RecyclerViewClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                       // Toast.makeText(getBaseContext(), "Position " + position,
+                        //        Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(MainActivity.this , MovieDetailsActivity.class);
+                        intent.putExtra("MOVIE_DETAILS" , mMovies.get(position));
+                        startActivity(intent);
+
+                    }
+                };
+
+                MovieAdapter adapter = new MovieAdapter(mMovies,getBaseContext(), listener);
                 recyclerView.setAdapter(adapter);
+
+
+
 
             }
 
@@ -82,11 +91,10 @@ public class MainActivity extends AppCompatActivity {
 
                 t.printStackTrace();
             }
+
+
         });
 
-
-
-
-
     }
+
 }

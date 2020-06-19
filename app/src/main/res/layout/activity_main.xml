@@ -6,21 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_below="@+id/text"
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text2"
-        android:layout_below="@+id/recycler_view"/>
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
