@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -33,10 +35,14 @@ public class MainActivity extends AppCompatActivity  {
 
     private ArrayList<Movie> mMovies = new ArrayList<>();
 
+    private ShimmerFrameLayout shimmerFrameLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        shimmerFrameLayout = findViewById(R.id.shimmer_view_container);
 
         Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(BASE_URL)
@@ -79,6 +85,9 @@ public class MainActivity extends AppCompatActivity  {
                 };
 
                 MovieAdapter adapter = new MovieAdapter(mMovies,getBaseContext(), listener);
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
                 recyclerView.setAdapter(adapter);
 
 
@@ -96,5 +105,20 @@ public class MainActivity extends AppCompatActivity  {
         });
 
     }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+    }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+        shimmerFrameLayout.stopShimmer();
+    }
+
 
 }
