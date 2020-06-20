@@ -2,24 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
-    android:layout_height="136dp"
-    android:orientation="horizontal"
-    android:padding="16dp">
+    android:layout_height="250dp"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
         android:id="@+id/poster_iamge"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="match_parent"
+        android:layout_height="204dp"
+        android:background="@color/colorPrimary"
+        android:padding="2dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:background="@android:color/white"/>
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
         android:layout_gravity="center"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:background="@color/colorPrimary"
         android:text="asdfg"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
 
 </LinearLayout>

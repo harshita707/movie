@@ -1,6 +1,7 @@
 package com.harshita.moviebuff;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,12 +38,16 @@ public class MainActivity extends AppCompatActivity  {
 
     private ShimmerFrameLayout shimmerFrameLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         shimmerFrameLayout = findViewById(R.id.shimmer_view_container);
+
+
+
 
         Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(BASE_URL)
@@ -67,9 +72,8 @@ public class MainActivity extends AppCompatActivity  {
 
                 }
                 RecyclerView recyclerView = findViewById(R.id.recycler_view);
-                LinearLayoutManager llm = new LinearLayoutManager(getBaseContext());
-                llm.setOrientation(LinearLayoutManager.VERTICAL);
-                recyclerView.setLayoutManager(llm);
+                recyclerView.setLayoutManager(new GridLayoutManager(getBaseContext(), 2));
+
 
                 RecyclerViewClickListener listener = new RecyclerViewClickListener() {
                     @Override
@@ -88,6 +92,7 @@ public class MainActivity extends AppCompatActivity  {
                 shimmerFrameLayout.stopShimmer();
                 shimmerFrameLayout.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
+
                 recyclerView.setAdapter(adapter);
 
 
@@ -111,6 +116,7 @@ public class MainActivity extends AppCompatActivity  {
 
         super.onResume();
         shimmerFrameLayout.startShimmer();
+
     }
 
     @Override

@@ -1,26 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/parent_layout"
     android:layout_width="match_parent"
-    android:layout_height="136dp"
-    android:orientation="horizontal"
-    android:padding="16dp"
-    android:elevation="4dp">
+    android:layout_height="266dp"
+    android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:id="@+id/poster_iamge"
-        android:background="@color/placeholder_bg"/>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="250dp"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        android:elevation="4dp">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/placeholder_bg"
-        android:padding="8dp"
-        android:layout_margin="8dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="205dp"
+            android:background="@color/placeholder_bg"
+            android:layout_margin="2dp" />
+
+        <TextView
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:background="@color/placeholder_bg"
+            android:gravity="center" />
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="250dp"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        android:elevation="4dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="205dp"
+            android:background="@color/placeholder_bg"
+            android:layout_margin="2dp" />
+
+        <TextView
+            android:layout_marginTop="2dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:background="@color/placeholder_bg"
+            android:gravity="center" />
+
+
+    </LinearLayout>
 </LinearLayout>
